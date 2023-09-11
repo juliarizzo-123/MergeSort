@@ -1,45 +1,35 @@
-To allow a test user to run the MergeSort application on their machine, follow these detailed steps:
+To allow a test user to run the MergeSort application on their machine, they should follow the following detailed steps. Ensure that the user has Java installed on their machine, as the code is written in Java.
 
-**Prerequisites:**
+Step 1: Code Preparation
 
-1. Ensure that you have the Java Development Kit (JDK) installed on your machine. You can verify this by running the following command in your terminal or command prompt:
+The code you provided appears to be in a Java file named MergeSort.java. Make sure the user has this file on their machine or provide them with the source code.
 
-   ```
-   java -version
-   ```
+Step 2: Code Compilation
 
-   If the JDK is not installed, you can download and install it from the official Oracle website or other trusted sources.
+Before running the program, the Java code needs to be compiled. This is done using the Java compiler (usually javac). Open a terminal or command prompt and navigate to the directory where the MergeSort.java file is located. Then, run the following command to compile the code:
 
-**Steps to execute the code:**
+bash
+Copy code
+javac MergeSort.java
+This will create a file named MergeSort.class in the same directory.
 
-1. Open a text editor or an Integrated Development Environment (IDE) of your choice, such as Eclipse, IntelliJ IDEA, or Visual Studio Code. Make sure that your Java development environment is set up correctly.
+Step 3: Running the Program
 
-2. Copy the provided code from the question (the `MergeSort` class and its methods) and paste it into a new file with the `.java` extension. For example, you can create a file called `MergeSort.java`.
+Now that the code has been successfully compiled, the user can execute the program. To do this, still in the terminal or command prompt, use the following command:
 
-3. Save the file in the directory of your choice on your system.
+bash
+Copy code
+java MergeSort <list_of_numbers>
 
-4. Open a terminal or command prompt and navigate to the directory where you saved the `MergeSort.java` file using the `cd` command.
+Replace <list_of_numbers> with the numbers the user wants to sort.
+For example, if the user wants to sort the numbers 5, 2, 8, 1, 9, they should execute the following command:
 
-5. Compile the Java code by entering the following command:
+java MergeSort 5 2 8 1 9
 
-   ```
-   javac MergeSort.java
-   ```
+The program will run the MergeSort algorithm on the provided numbers and print the sorted list in the terminal.
 
-   This will compile the code and generate a file named `MergeSort.class`.
+Step 4: Observing the Results
 
-6. Now, you can run the program by entering the following command:
+After running the program, the numbers provided by the user will be sorted and displayed in the terminal. Ensure that the results are correct.
 
-   ```
-   java MergeSort
-   ```
-
-7. The program will run and prompt you to enter the size of the array and the array elements separated by spaces, as mentioned in the code.
-
-8. Follow the instructions provided by the program, input the requested data, and observe the result of the sorting being displayed in the terminal.
-
-9. You can run the program again with different values or exit the execution as per the displayed instructions.
-
-10. When you are done using the program, simply close the terminal or command prompt.
-
-These steps complete the process of running the MergeSort application on your machine. Ensure that you have the JDK installed and configured correctly to compile and run the Java code. The program allows you to test the Merge Sort algorithm for sorting arrays of integer numbers.
+It's important to note that the provided code does not handle input errors, so the user should ensure they provide only integers as input. Otherwise, the program may generate exception errors.

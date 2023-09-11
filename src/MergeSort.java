@@ -1,87 +1,84 @@
-import java.util.Arrays;
-import java.util.Scanner;
-
 public class MergeSort {
-
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        boolean continuar = true;
+        if (args.length == 0) {
+            System.err.println("Erro: Nenhum vetor de entrada fornecido.");
+            return;
+        }
 
-        while (continuar) {
-
-            // Solicita ao usuário o tamanho do array
-            System.out.print("Digite o tamanho do array: ");
-            int size = scanner.nextInt();
-            int[] arr = new int[size];
-
-            // Solicita ao usuário os elementos do array separados por espaço e os armazena no array
-            System.out.println("Digite os elementos do array separados por espaço:");
-            for (int i = 0; i < size; i++) {
-                arr[i] = scanner.nextInt();
+        try {
+            // Converte os argumentos de entrada em um vetor de inteiros
+            int[] inputArray = new int[args.length];
+            for (int i = 0; i < args.length; i++) {
+                inputArray[i] = Integer.parseInt(args[i]);
             }
 
-            // Exibe o array original
-            System.out.println("\nArray original: " + Arrays.toString(arr));
-            // Chama a função mergeSort para ordenar o array
-            mergeSort(arr, 0, arr.length - 1);
-            // Exibe o array ordenado
-            System.out.println("\nArray ordenado : " + Arrays.toString(arr));
+            // Chama o algoritmo MergeSort para ordenar o vetor
+            mergeSort(inputArray, 0, inputArray.length - 1);
 
-            System.out.print("\nDeseja continuar (S/N)? ");
-            String resposta = scanner.next();
-            if (!resposta.equalsIgnoreCase("S")) {
-                continuar = false;
-                }
-        }
-        scanner.close();
-    }
-
-    // Função recursiva para dividir o array e chamar a função merge
-    public static void mergeSort(int[] arr, int low, int high) {
-        if (low < high) {
-            int mid = (low + high) / 2;
-            mergeSort(arr, low, mid); // Ordena a metade esquerda do array
-            mergeSort(arr, mid + 1, high); // Ordena a metade direita do array
-            merge(arr, low, mid, high);// Combina as duas metades ordenadas
+            // Imprime o vetor ordenado
+            for (int num : inputArray) {
+                System.out.print(num + " ");
+            }
+            System.out.println();
+        } catch (NumberFormatException e) {
+            System.err.println("Erro: Argumento de entrada não pode ser tratado como vetor.");
         }
     }
 
-    // Função para mesclar duas partes ordenadas do array
-    public static void merge(int[] arr, int low, int mid, int high) {
-        int[] temp = new int[high - low + 1];
-        int i = low;
-        int j = mid + 1;
-        int k = 0;
+    // Implementação do algoritmo MergeSort
+    public static void mergeSort(int[] arr, int left, int right) {
+        if (left < right) {
+            int middle = left + (right - left) / 2;
+            mergeSort(arr, left, middle);     // Ordena a metade esquerda do vetor
+            mergeSort(arr, middle + 1, right); // Ordena a metade direita do vetor
+            merge(arr, left, middle, right);   // Combina as duas metades ordenadas
+        }
+    }
 
-        // Combina os elementos das duas partes em ordem crescente
-        while (i <= mid && j <= high) {
-            if (arr[i] <= arr[j]) {
-                temp[k] = arr[i];
+    // Função para mesclar duas partes ordenadas do vetor
+    public static void merge(int[] arr, int left, int middle, int right) {
+        // Calcula o tamanho das duas metades
+        int n1 = middle - left + 1;
+        int n2 = right - middle;
+
+        // Cria vetores temporários para armazenar as duas metades
+        int[] leftArr = new int[n1];
+        int[] rightArr = new int[n2];
+
+        // Copia os elementos das duas metades para os vetores temporários
+        for (int i = 0; i < n1; i++) {
+            leftArr[i] = arr[left + i];
+        }
+        for (int j = 0; j < n2; j++) {
+            rightArr[j] = arr[middle + 1 + j];
+        }
+
+        // Mescla os dois vetores temporários de volta ao vetor original
+        int i = 0, j = 0;
+        int k = left;
+        while (i < n1 && j < n2) {
+            if (leftArr[i] <= rightArr[j]) {
+                arr[k] = leftArr[i];
                 i++;
             } else {
-                temp[k] = arr[j];
+                arr[k] = rightArr[j];
                 j++;
             }
             k++;
         }
 
-        // Copia os elementos restantes da primeira metade, se houver
-        while (i <= mid) {
-            temp[k] = arr[i];
+        // Copia os elementos restantes, se houver, de leftArr para o vetor original
+        while (i < n1) {
+            arr[k] = leftArr[i];
             i++;
             k++;
         }
 
-        // Copia os elementos restantes da segunda metade, se houver
-        while (j <= high) {
-            temp[k] = arr[j];
+        // Copia os elementos restantes, se houver, de rightArr para o vetor original
+        while (j < n2) {
+            arr[k] = rightArr[j];
             j++;
             k++;
-        }
-
-        // Copia os elementos mesclados de volta para o array original
-        for (i = low; i <= high; i++) {
-            arr[i] = temp[i - low];
         }
     }
 }
